@@ -13,5 +13,18 @@ void main() {
     test("Initial State is 0", () {
       expect(counterBloc.state.value, 0);
     });
+
+    blocTest<CounterBloc, CounterState>(
+      "Emit [1] when Increment Pressed is added",
+      build: () => counterBloc,
+      act: (bloc) => bloc.add(Increment()),
+      expect: () => [CounterState(1)],
+    );
+    blocTest<CounterBloc, CounterState>(
+      "Emit [-1] when Decrement Pressed is added",
+      build: () => counterBloc,
+      act: (bloc) => bloc.add(Decrement()),
+      expect: () => [CounterState(-1)],
+    );
   });
 }
